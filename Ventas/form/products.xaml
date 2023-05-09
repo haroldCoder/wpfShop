@@ -9,10 +9,41 @@
     <Grid x:Name="prodata">
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" VerticalAlignment="Top" Height="100" Background="#FF0092EF">
-            <Label HorizontalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="20">Products Sesion</Label>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label HorizontalAlignment="Center" Grid.Column="0" VerticalContentAlignment="Center" Foreground="White" FontSize="20">Sesion de Productos.</Label>
+            <Button Grid.Column="1" Background="White" Foreground="#FF0084FF" FontSize="18" BorderBrush="Black" Height="50" Margin="0,0,40,0" Width="200" HorizontalAlignment="Right" Click="Addp">Agregar producto</Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Lista de Productos" FontSize="20" FontWeight="Bold" Margin="10" />
+
+            <ListView Grid.Row="1" Margin="10" ItemsSource="{Binding Products}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nombre" DisplayMemberBinding="{Binding nombre}" Width="200" />
+                        <GridViewColumn Header="Precio" DisplayMemberBinding="{Binding precio}" Width="100" />
+                        <GridViewColumn Header="Imagen" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding img}" Width="100" Height="100" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </UserControl>

@@ -113,13 +113,13 @@
                         <Button Style="{StaticResource CustomButtonStyle}" x:Name="menu" Click="Menu_Click" Grid.Row="0" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Right" Background="White" BorderBrush="#FF004AFF">
                             <Image Source="./assets/menus.png"/>
                         </Button>
-                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="home" Grid.Row="1" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" Foreground="Black" BorderBrush="#FF0061FF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="home" Grid.Row="1" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" Foreground="Black" BorderBrush="#FF0061FF" Click="GotoHome">
                             <Image  Source="./assets/home.png" OpacityMask="Black"/>
                         </Button>
                         <Button Style="{StaticResource CustomButtonStyle}" x:Name="comunity" Grid.Row="2" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Click="View_form" Background="Black" BorderBrush="#FF0056FF">
                             <Image Source="./assets/comunity.png"/>
                         </Button>
-                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="geo" Grid.Row="3" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF003EFF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="geo" Grid.Row="3" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF003EFF" Click="viewPoints">
                             <Image Source="./assets/geo.png"/>
                         </Button>
                         <Button Style="{StaticResource CustomButtonStyle}" x:Name="buys" Grid.Row="5" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF0033FF" Click="viewProds">

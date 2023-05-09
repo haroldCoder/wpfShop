@@ -28,6 +28,7 @@ namespace Ventas
         public MainWindow()
         {
             InitializeComponent();
+            Myframe.NavigationService.Navigate(new MainPage());
         }
         private void MinimizarVentana_Click(object sender, RoutedEventArgs e)
         {
@@ -81,7 +82,17 @@ namespace Ventas
 
         private void viewProds(object sender, RoutedEventArgs e)
         {
-            Myframe.NavigationService.Navigate(new products());
+            Myframe.NavigationService.Navigate(new products(Myframe));
+        }
+
+        private void GotoHome(object sender, RoutedEventArgs e)
+        {
+            Myframe.NavigationService.Navigate(new MainPage());
+        }
+
+        private void viewPoints(object sender, RoutedEventArgs e)
+        {
+            Myframe.NavigationService.Navigate(new pointsShop());
         }
     }
 }

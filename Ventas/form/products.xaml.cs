@@ -22,86 +22,69 @@ namespace Ventas.form
     /// Lógica de interacción para products.xaml
     /// </summary>
     /// 
-    public class Prod { 
+    public class Product { 
         public int ID { get; set; }
         public string nombre { get; set; }
         public double precio { get; set; }
         public string img { get; set; }
+
+        public Product(string nombre, double price, string img)
+        {
+            this.nombre = nombre;
+            this.precio = precio;
+            this.img = img;
+        }
     }
     public partial class products : UserControl
     {
-        List<Prod> prods = new List<Prod>();
+        Frame fr;
 
-        public products()
+        public products(Frame fr)
         {
             InitializeComponent();
 
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["usuarios"].ConnectionString);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM prod",con);
-            SqlDataReader reader = cmd.ExecuteReader();
+            // Obtener los productos de la base de datos y almacenarlos en la lista
+            Products = GetProductsFromDatabase();
 
-            while (reader.Read())
+            // Vincular la lista de productos a la vista
+            DataContext = this;
+            this.fr = fr;
+        }
+
+        public List<Product> Products { get; set; }
+
+        private List<Product> GetProductsFromDatabase()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["usuarios"].ConnectionString))
             {
-                Prod prd = new Prod();
-                prd.ID = (int)reader["ID"];
-                prd.nombre = (string)reader["nombre"];
-                prd.precio = (double)reader["precio"];
-                prd.img = (string)reader["img"];
+                connection.Open();
 
-                prods.Add(prd);
+                SqlCommand command = new SqlCommand("SELECT nombre, precio, img FROM prod", connection);
+                SqlDataReader reader = command.ExecuteReader();
 
-                Grid grid;
-                Grid[] subgrids = new Grid[prods.Count+1];
+                List<Product> productList = new List<Product>();
 
-                int ite = 0;
-
-                for(int i = 0; i<prods.Count+1; i++)
+                while (reader.Read())
                 {
-                    prodata.RowDefinitions.Add(new RowDefinition());
-                    grid = new Grid() { VerticalAlignment = System.Windows.VerticalAlignment.Top};
-                    prodata.Children.Add(grid);
-                    Grid.SetRow(grid, 1);
-                    grid.ColumnDefinitions.Add(new ColumnDefinition());
-                    subgrids[i] = new Grid() { Width=300, Background=Brushes.Gray};
-                    grid.Children.Add(subgrids[i]);
-                    Grid.SetColumn(subgrids[i], i);
-                    for(int j = 0; j<3; j++)
-                    {
-                        subgrids[i].RowDefinitions.Add(new RowDefinition());
-                    } 
+                    string name = (string)reader["nombre"];
+                    double price = (double)reader["precio"];
+                    string imageUrl = (string)reader["img"];
+
+                    Product product = new Product(name, price, imageUrl);
+                    productList.Add(product);
                 }
 
-                foreach(var pr in prods)
-                {
-                    Console.WriteLine("nombres",pr.nombre);
-                    BitmapImage bitmap = new BitmapImage();
+                reader.Close();
+                connection.Close();
 
-                    // Establece la ruta de la imagen
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri("https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202104/05/00118630004077____2__600x600.jpg");
-                    bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    bitmap.EndInit();
-
-                    
-                    var img = new Image() { Source=bitmap};
-                    var nombre = new Label(){ Content = pr.nombre, Foreground = Brushes.White};
-                    var precio = new Label() { Content = pr.precio, Foreground = Brushes.White };
-
-                    subgrids[ite].Children.Add(img);
-                    Grid.SetRow(img, 0);
-
-
-                    subgrids[ite].Children.Add(nombre);
-                    Grid.SetRow(nombre, 1);
-
-                    subgrids[ite].Children.Add(precio);
-                    Grid.SetRow(precio, 2);
-                    ite++;
-                }
-                
-
+                return productList;
+                throw new NotImplementedException();
             }
+        }
+
+        private void Addp(object sender, RoutedEventArgs e)
+        {
+            fr.NavigationService.Navigate(new AddProduct());
         }
     }
 }
