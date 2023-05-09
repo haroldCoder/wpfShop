@@ -48,32 +48,58 @@ namespace Ventas.form
                 prd.nombre = (string)reader["nombre"];
                 prd.precio = (double)reader["precio"];
                 prd.img = (string)reader["img"];
-                
 
-                var grid = new Grid() { VerticalAlignment=System.Windows.VerticalAlignment.Top,};
+                prods.Add(prd);
+
+                Grid grid;
                 Grid[] subgrids = new Grid[prods.Count+1];
+
+                int ite = 0;
+
                 for(int i = 0; i<prods.Count+1; i++)
                 {
                     prodata.RowDefinitions.Add(new RowDefinition());
+                    grid = new Grid() { VerticalAlignment = System.Windows.VerticalAlignment.Top};
                     prodata.Children.Add(grid);
                     Grid.SetRow(grid, 1);
                     grid.ColumnDefinitions.Add(new ColumnDefinition());
-
-                    subgrids = new Grid[prods.Count + 1];
-                    subgrids[i] = new Grid(){ Background = System.Windows.Media.Brushes.Aqua };
+                    subgrids[i] = new Grid() { Width=300, Background=Brushes.Gray};
                     grid.Children.Add(subgrids[i]);
                     Grid.SetColumn(subgrids[i], i);
-                    for(int j = 0; j<5; j++)
+                    for(int j = 0; j<3; j++)
                     {
                         subgrids[i].RowDefinitions.Add(new RowDefinition());
                     } 
                 }
 
-                var img = new Image();
-                var nombre = new Label(){ Content = prd.nombre, Foreground = Brushes.White};
-                var precio = new Label() { Content = prd.precio, Foreground = Brushes.White };
+                foreach(var pr in prods)
+                {
+                    Console.WriteLine("nombres",pr.nombre);
+                    BitmapImage bitmap = new BitmapImage();
 
-                subgrids[0].Children.Add(nombre);
+                    // Establece la ruta de la imagen
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri("https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202104/05/00118630004077____2__600x600.jpg");
+                    bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    bitmap.EndInit();
+
+                    
+                    var img = new Image() { Source=bitmap};
+                    var nombre = new Label(){ Content = pr.nombre, Foreground = Brushes.White};
+                    var precio = new Label() { Content = pr.precio, Foreground = Brushes.White };
+
+                    subgrids[ite].Children.Add(img);
+                    Grid.SetRow(img, 0);
+
+
+                    subgrids[ite].Children.Add(nombre);
+                    Grid.SetRow(nombre, 1);
+
+                    subgrids[ite].Children.Add(precio);
+                    Grid.SetRow(precio, 2);
+                    ite++;
+                }
+                
 
             }
         }
