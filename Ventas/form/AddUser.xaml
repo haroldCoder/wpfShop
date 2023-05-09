@@ -83,16 +83,16 @@
                     <Label Grid.Column="0" Foreground="#FFF1F5F7" FontSize="14">Direccion</Label>
                     <TextBox x:Name="boxdir" Grid.Column="1" Text="direccion" FontSize="14" Background="Black" Foreground="#FF7B7B7B" BorderBrush="#FF002EB9" Margin="4,2,0,2"/>
                 </Grid>
-                <Grid Grid.Row="6" Width="500" Margin="5" HorizontalAlignment="Left">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Foreground="#444" FontSize="14">acceso</Label>
-                    <TextBox x:Name="textacc" Grid.Column="1" Text="acceso" FontSize="14" Background="Black" Foreground="#FF7B7B7B" BorderBrush="#FF002EB9" Margin="4,2,0,2"/>
+                <Grid Grid.Row="6" Width="500" Margin="5,5,0,0" HorizontalAlignment="Left">
+                    <GroupBox x:Name="acc" Header="Seleccione una opción">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="rd" Content="1" IsChecked="True" />
+                            <RadioButton x:Name="rd2" Content="0" />
+                        </StackPanel>
+                    </GroupBox>
                 </Grid>
                 <Button x:Name="addbtn" Height="40"  Width="350" Grid.Row="7"  Foreground="White" Background="Black" BorderBrush="#FF0027FF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,10,0">Agregar</Button>
             </Grid>
-        </Grid>   
+        </Grid>
     </Grid>
 </UserControl>

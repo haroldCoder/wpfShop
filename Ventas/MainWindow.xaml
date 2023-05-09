@@ -6,8 +6,36 @@
         xmlns:local="clr-namespace:Ventas"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowStyle="None">
-
+    <Window.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#AAA" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="BackgroundRectangle"
+                                                    Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                                    To="#888" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle x:Name="BackgroundRectangle" Fill="{TemplateBinding Background}" RadiusX="5" RadiusY="5" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Background="#FF121212">
+        
         <!-- ventana principal-->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -17,25 +45,14 @@
         <!--definimos las 3 filas que sera el menu de cerrar maxi y minimizar, el menu de navegacion, y la barra principal-->
         <Grid Grid.Row="0" Background="Black">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right">
-                <Button x:Name="min" VerticalAlignment="Bottom" Height="15" Margin="0 5 10 5" Width="30" Click="MinimizarVentana_Click">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="Blue"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="LightGreen"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
+                <Button Style="{StaticResource CustomButtonStyle}" x:Name="min" VerticalAlignment="Bottom" Height="15" Margin="0 5 10 5" Width="30" Click="MinimizarVentana_Click">
                     <!-- se crea unos estilos para el boton, el cual hace que al usuario pasar el mouse por el boton, este tenga un background cyan-->
                     <Image Source="./assets/minimizar.png" />
                 </Button>
-                <Button x:Name="max" Margin="0 5 10 5" Width="20" Click="MaximizarVentana_Click">
+                <Button Style="{StaticResource CustomButtonStyle}" x:Name="max" Margin="0 5 10 5" Width="20" Click="MaximizarVentana_Click">
                     <Image Source="./assets/maximizar.png" />
                 </Button>
-                <Button x:Name="close" Margin="0 5 2 5" Width="20" Click="CerrarVentana_Click">
+                <Button Style="{StaticResource CustomButtonStyle}" x:Name="close" Margin="0 5 2 5" Width="20" Click="CerrarVentana_Click">
                     <Image Source="./assets/close.png" />
                 </Button>
             </StackPanel>
@@ -54,7 +71,7 @@
                 </Grid.ColumnDefinitions>
                 <!--difinimos una columna, para los dos iconos para que se vea alineado horizontalmente-->
 
-                <Grid x:Name="account" Grid.Column="0" Width="130">
+                <Grid  x:Name="account" Grid.Column="0" Width="130">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -93,19 +110,19 @@
                         </Grid.RowDefinitions>
                         <!-- Definimos 5 filas para el menu hamburgues, home, comunidad, puntos de venta y compras-->
 
-                        <Button x:Name="menu" Click="Menu_Click" Grid.Row="0" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Right" Background="White" BorderBrush="#FF004AFF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="menu" Click="Menu_Click" Grid.Row="0" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Right" Background="White" BorderBrush="#FF004AFF">
                             <Image Source="./assets/menus.png"/>
                         </Button>
-                        <Button x:Name="home" Grid.Row="1" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" Foreground="Black" BorderBrush="#FF0061FF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="home" Grid.Row="1" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" Foreground="Black" BorderBrush="#FF0061FF">
                             <Image  Source="./assets/home.png" OpacityMask="Black"/>
                         </Button>
-                        <Button x:Name="comunity" Grid.Row="2" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Click="View_form" Background="Black" BorderBrush="#FF0056FF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="comunity" Grid.Row="2" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Click="View_form" Background="Black" BorderBrush="#FF0056FF">
                             <Image Source="./assets/comunity.png"/>
                         </Button>
-                        <Button x:Name="geo" Grid.Row="3" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF003EFF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="geo" Grid.Row="3" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF003EFF">
                             <Image Source="./assets/geo.png"/>
                         </Button>
-                        <Button x:Name="buys" Grid.Row="5" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF0033FF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="buys" Grid.Row="5" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF0033FF">
                             <Image Source="./assets/compras.png"/>
                         </Button>
                     </Grid>
