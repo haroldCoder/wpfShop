@@ -78,5 +78,10 @@ namespace Ventas
         {
             Myframe.NavigationService.Navigate(new UserControl1(Myframe));
         }
+
+        private void viewProds(object sender, RoutedEventArgs e)
+        {
+            Myframe.NavigationService.Navigate(new products());
+        }
     }
 }

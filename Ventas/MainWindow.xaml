@@ -122,7 +122,7 @@
                         <Button Style="{StaticResource CustomButtonStyle}" x:Name="geo" Grid.Row="3" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF003EFF">
                             <Image Source="./assets/geo.png"/>
                         </Button>
-                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="buys" Grid.Row="5" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF0033FF">
+                        <Button Style="{StaticResource CustomButtonStyle}" x:Name="buys" Grid.Row="5" Margin="0 0 0 18" Height="30" Width="32" HorizontalAlignment="Left" Background="Black" BorderBrush="#FF0033FF" Click="viewProds">
                             <Image Source="./assets/compras.png"/>
                         </Button>
                     </Grid>
